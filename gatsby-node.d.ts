@@ -25,6 +25,19 @@ export interface PluginOptions {
    * ```
    */
   output?: string;
+
+  /**
+   * Renames `sitemap-index.xml` to `sitemap.xml`.
+   * Set to `false` to keep Gatsby's default `sitemap-index.xml` filename.
+   * @default true
+   * @example
+   * ```js
+   * {
+   *   renameSitemapIndex: false
+   * }
+   * ```
+   */
+  renameSitemapIndex?: boolean;
 }
 
 /**
@@ -33,7 +46,7 @@ export interface PluginOptions {
  * This plugin automatically:
  * - Copies the XSL stylesheet to your public directory
  * - Injects XSL references into all sitemap files
- * - Renames sitemap-index.xml to sitemap.xml
+ * - Renames sitemap-index.xml to sitemap.xml (configurable)
  * 
  * @example
  * ```js

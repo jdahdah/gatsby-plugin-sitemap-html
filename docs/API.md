@@ -46,6 +46,25 @@ Folder path where sitemaps are stored. Must match the `output` option in `gatsby
 }
 ```
 
+### `renameSitemapIndex`
+
+- **Type:** `boolean`
+- **Default:** `true`
+- **Optional:** Yes
+
+Renames `sitemap-index.xml` to `sitemap.xml` after sitemap processing. Set to `false` to keep Gatsby's default `sitemap-index.xml` filename.
+
+**Example:**
+
+```js
+{
+  resolve: 'gatsby-plugin-sitemap-html',
+  options: {
+    renameSitemapIndex: false,
+  },
+}
+```
+
 ## Gatsby Hooks
 
 ### `onPostBuild`
@@ -57,7 +76,7 @@ This plugin implements the `onPostBuild` hook to process sitemap files after the
 1. Copies the XSL template to the `public` directory
 2. Scans for sitemap files (`sitemap-index.xml`, `sitemap-0.xml`, etc.)
 3. Injects XSL stylesheet references into each sitemap file
-4. Renames `sitemap-index.xml` to `sitemap.xml`
+4. Optionally renames `sitemap-index.xml` to `sitemap.xml`
 
 ## File Processing
 
@@ -65,7 +84,7 @@ This plugin implements the `onPostBuild` hook to process sitemap files after the
 
 The plugin automatically processes:
 
-- `sitemap-index.xml` (renamed to `sitemap.xml`)
+- `sitemap-index.xml` (renamed to `sitemap.xml` by default)
 - `sitemap-0.xml`, `sitemap-1.xml`, etc. (all numbered sitemap files)
 
 ### XSL Injection

@@ -10,6 +10,8 @@ const path = require('path');
 exports.onPostBuild = async ({ store }, pluginOptions) => {
   const { program } = store.getState();
   const output = pluginOptions.output || '/';
+  const renameSitemapIndex = pluginOptions.renameSitemapIndex !== false;
+  const indexSitemapHref = renameSitemapIndex ? '/sitemap.xml' : '/sitemap-index.xml';
   const publicDir = program.directory
     ? path.join(program.directory, 'public', output)
     : path.join('public', output);
@@ -24,7 +26,18 @@ exports.onPostBuild = async ({ store }, pluginOptions) => {
   }
 
   // Copy XSL template to public directory
-  await fs.copy(xslTemplate, path.join(publicDir, 'sitemap.xsl'));
+  const publicXslPath = path.join(publicDir, 'sitemap.xsl');
+  await fs.copy(xslTemplate, publicXslPath);
+
+  // Keep built-in back-to-index links aligned with renameSitemapIndex option.
+  if (!pluginOptions.xslTemplate) {
+    const xslContent = await fs.readFile(publicXslPath, 'utf8');
+    const updatedXslContent = xslContent.replace(
+      /href="\/sitemap(?:-index)?\.xml"/g,
+      `href="${indexSitemapHref}"`
+    );
+    await fs.writeFile(publicXslPath, updatedXslContent);
+  }
 
   // Inject XSL reference into all sitemap files
   const sitemapFiles = (await fs.readdir(publicDir)).filter(
@@ -64,10 +77,12 @@ exports.onPostBuild = async ({ store }, pluginOptions) => {
     await fs.writeFile(filePath, content);
   }
 
-  // Rename sitemap-index.xml to sitemap.xml
-  const sitemapIndexPath = path.join(publicDir, 'sitemap-index.xml');
-  const sitemapPath = path.join(publicDir, 'sitemap.xml');
-  if (await fs.pathExists(sitemapIndexPath)) {
-    await fs.move(sitemapIndexPath, sitemapPath, { overwrite: true });
+  if (renameSitemapIndex) {
+    // Rename sitemap-index.xml to sitemap.xml
+    const sitemapIndexPath = path.join(publicDir, 'sitemap-index.xml');
+    const sitemapPath = path.join(publicDir, 'sitemap.xml');
+    if (await fs.pathExists(sitemapIndexPath)) {
+      await fs.move(sitemapIndexPath, sitemapPath, { overwrite: true });
+    }
   }
 };
