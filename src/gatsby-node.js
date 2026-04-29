@@ -63,11 +63,4 @@ exports.onPostBuild = async ({ store }, pluginOptions) => {
 
     await fs.writeFile(filePath, content);
   }
-
-  // Rename sitemap-index.xml to sitemap.xml
-  const sitemapIndexPath = path.join(publicDir, 'sitemap-index.xml');
-  const sitemapPath = path.join(publicDir, 'sitemap.xml');
-  if (await fs.pathExists(sitemapIndexPath)) {
-    await fs.move(sitemapIndexPath, sitemapPath, { overwrite: true });
-  }
 };

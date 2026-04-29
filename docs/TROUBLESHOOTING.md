@@ -4,7 +4,7 @@
 
 ### Sitemap not styled in browser
 
-**Symptoms:** Visiting `/sitemap.xml` shows plain XML instead of styled HTML.
+**Symptoms:** Visiting `/sitemap-index.xml` (or `/sitemap-0.xml`, etc.) shows plain XML instead of styled HTML.
 
 **Possible causes:**
 

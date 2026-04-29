@@ -57,7 +57,6 @@ This plugin implements the `onPostBuild` hook to process sitemap files after the
 1. Copies the XSL template to the `public` directory
 2. Scans for sitemap files (`sitemap-index.xml`, `sitemap-0.xml`, etc.)
 3. Injects XSL stylesheet references into each sitemap file
-4. Renames `sitemap-index.xml` to `sitemap.xml`
 
 ## File Processing
 
@@ -65,7 +64,7 @@ This plugin implements the `onPostBuild` hook to process sitemap files after the
 
 The plugin automatically processes:
 
-- `sitemap-index.xml` (renamed to `sitemap.xml`)
+- `sitemap-index.xml`
 - `sitemap-0.xml`, `sitemap-1.xml`, etc. (all numbered sitemap files)
 
 ### XSL Injection

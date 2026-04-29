@@ -33,7 +33,6 @@ export interface PluginOptions {
  * This plugin automatically:
  * - Copies the XSL stylesheet to your public directory
  * - Injects XSL references into all sitemap files
- * - Renames sitemap-index.xml to sitemap.xml
  * 
  * @example
  * ```js

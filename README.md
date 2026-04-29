@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-That's it! Build your site and visit `/sitemap.xml` in your browser to see the styled sitemap.
+That's it! Build your site and visit `/sitemap-index.xml` in your browser to see the styled sitemap index (or `/sitemap-0.xml`, etc., for chunked sitemaps).
 
 ## ⚙️ Configuration
 
@@ -105,7 +105,6 @@ module.exports = {
 2. This plugin automatically:
    - Copies the XSL stylesheet to your public directory
    - Injects XSL references into all sitemap files
-   - Renames `sitemap-index.xml` to `sitemap.xml` for standard naming
 3. When users visit your sitemap in a browser, they see a styled HTML page
 4. Search engines still see the standard XML structure
 
@@ -145,7 +144,7 @@ pnpm run build
 pnpm run serve
 ```
 
-Then visit `http://localhost:9000/sitemap.xml`
+Then visit `http://localhost:9000/sitemap-index.xml`
 
 ## 🤝 Contributing
 

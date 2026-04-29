@@ -19,7 +19,6 @@ describe('gatsby-plugin-sitemap-html', () => {
     fs.readFile = jest.fn();
     fs.writeFile = jest.fn();
     fs.readdir = jest.fn().mockResolvedValue([]);
-    fs.move = jest.fn();
   });
 
   test('copies XSL template to public directory', async () => {
@@ -32,7 +31,7 @@ describe('gatsby-plugin-sitemap-html', () => {
     );
   });
 
-  test('injects XSL reference into sitemap files and renames index', async () => {
+  test('injects XSL reference into sitemap files', async () => {
     fs.readdir.mockResolvedValue(['sitemap-index.xml', 'sitemap-0.xml']);
     fs.pathExists.mockResolvedValue(true);
     fs.readFile.mockResolvedValue('<?xml version="1.0" encoding="UTF-8"?>');
@@ -44,11 +43,6 @@ describe('gatsby-plugin-sitemap-html', () => {
       expect.stringContaining(
         '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>'
       )
-    );
-    expect(fs.move).toHaveBeenCalledWith(
-      path.join('/mock/root/public', 'sitemap-index.xml'),
-      path.join('/mock/root/public', 'sitemap.xml'),
-      { overwrite: true }
     );
   });
 

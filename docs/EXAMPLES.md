@@ -395,7 +395,7 @@ module.exports = {
   publish = "public"
 
 [[headers]]
-  for = "/sitemap.xml"
+  for = "/sitemap-index.xml"
   [headers.values]
     Content-Type = "application/xml"
     Cache-Control = "public, max-age=3600"
@@ -413,7 +413,7 @@ module.exports = {
 {
   "headers": [
     {
-      "source": "/sitemap.xml",
+      "source": "/sitemap-index.xml",
       "headers": [
         {
           "key": "Content-Type",
@@ -439,7 +439,7 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: 'https://www.example.com',
-        sitemap: 'https://www.example.com/sitemap.xml',
+        sitemap: 'https://www.example.com/sitemap-index.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
